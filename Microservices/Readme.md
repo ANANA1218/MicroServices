@@ -88,6 +88,10 @@ networks:
 - **URL** : http://localhost:8080/
 ![alt text](image-2.png)
 
+### 6. Backend avec swagger
+- **URL** :http://localhost:5000/api-docs/
+![alt text](image-14.png)
+
 ## Commandes Utiles
 
 ```bash
@@ -160,3 +164,16 @@ portainer
 
 cAdvisor
 ![alt text](image-4.png)
+
+
+Pour lancer les test healcheack il faut faire un bash healthcheck dans un terminal powershell
+
+![alt text](image.png)
+
+lancer cypresss:
+
+npm run cypress:run
+
+resultat 
+
+![alt text](<frontend/cypress/screenshots/articles_spec.cy.js/Test des articles -- Charge la liste des articles (failed).png>)

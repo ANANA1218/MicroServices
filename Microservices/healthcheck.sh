@@ -1,22 +1,49 @@
 #!/bin/bash
 
-# Test du backend
-if curl --silent --fail http://localhost:5000; then
-    echo "Backend est en ligne"
+# Vérification des services
+
+echo "Vérification des services..."
+
+# Test du base de données
+if curl --silent --fail http://localhost:8080/; then
+    echo "✅ Adminer est en ligne"
 else
-    echo "Backend est hors ligne"
+    echo "❌ Adminer est hors ligne"
 fi
 
 # Test du frontend
 if curl --silent --fail http://localhost:3001; then
-    echo "Frontend est en ligne"
+    echo "✅ Frontend est en ligne"
 else
-    echo "Frontend est hors ligne"
+    echo "❌ Frontend est hors ligne"
 fi
 
-# Test de la base de données (assurez-vous que le client MySQL est installé)
-if mysqladmin ping -h localhost -u user -proot; then
-    echo "Base de données est en ligne"
+# Test du CAdvisor
+if curl --silent --fail http://localhost:8081/containers/; then
+    echo "✅ CAdvisor est en ligne"
 else
-    echo "Base de données est hors ligne"
+    echo "❌ CAdvisor est hors ligne"
 fi
+
+# Test du weave scope
+if curl --silent --fail http://localhost:4040/#!/state/{%22topologyId%22:%22containers%22}; then
+    echo "✅ weave scope est en ligne"
+else
+    echo "❌ weave scope est hors ligne"
+fi
+
+# Test du Prometheus
+if curl --silent --fail http://localhost:9090/query; then
+    echo "✅ Prometheus est en ligne"
+else
+    echo "❌ Prometheus est hors ligne"
+fi
+
+
+# Test du Grafana
+if curl --silent --fail http://localhost:9000/#!/home; then
+    echo "✅ Grafana est en ligne"
+else
+    echo "❌ Grafana est hors ligne"
+fi
+

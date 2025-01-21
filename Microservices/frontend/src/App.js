@@ -55,7 +55,7 @@ const App = () => {
     };
 
     return (
-        <div className="container mt-5">
+     <div className="container mt-5">
             <h1 className="text-center mb-4">Gestion des Articles</h1>
             <form onSubmit={handleAddOrUpdate} className="mb-4 p-4 bg-light rounded shadow">
                 <div className="mb-3">
