@@ -115,14 +115,22 @@ docker tag votrenomdutilisateur:latest nana1212/votrenomdutilisateur:latest
 
 ```
 
+![alt text](images/image-7.png)
+
 3. Poussez les images :
 ```bash
 docker push votrenomdutilisateur/backend:latest
 docker push votrenomdutilisateur/frontend:latest
 ```
-![alt text](image-1.png)
+![alt text](images/image-5.png)
 
-![alt text](image-2.png)
+![alt text](images/image-6.png)
 
 Remplacez "votrenomdutilisateur" par votre nom d'utilisateur Docker Hub.
 
+### Architecture :
+
+![alt text](images/MicroServices.drawio.png)
+
+
+###
