@@ -100,4 +100,29 @@ docker-compose logs <nom_du_service>
 - Ajouter des labels Docker pour améliorer la visibilité
 
 
-publication d'au moins 2 images :
+
+### Pour pousser vos images Docker sur Docker Hub (Assurez-vous d'avoir créé un compte Docker Hub au préalable si ce n'est pas déjà fait) :
+
+1. Connectez-vous à Docker Hub :
+```bash
+docker login
+```
+
+2. Taguez vos images locales avec votre nom d'utilisateur Docker Hub :
+```bash
+docker tag votrenomdutilisateur:latest nana1212/votrenomdutilisateur:latest
+docker tag votrenomdutilisateur:latest nana1212/votrenomdutilisateur:latest
+
+```
+
+3. Poussez les images :
+```bash
+docker push votrenomdutilisateur/backend:latest
+docker push votrenomdutilisateur/frontend:latest
+```
+![alt text](image-1.png)
+
+![alt text](image-2.png)
+
+Remplacez "votrenomdutilisateur" par votre nom d'utilisateur Docker Hub.
+
