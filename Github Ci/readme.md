@@ -63,77 +63,7 @@ Après avoir effectué mes changements, je me suis assuré que mes workflows fon
 
 ![alt text](images/image-7.png)
 
----
 
-## 2 . **Installation de `act`**
-
-### Étapes d'installation
-
-1. **Téléchargement de `act`**
-   
-   J'ai téléchargé la version Windows de `act` depuis le dépôt GitHub de [nektos/act](https://github.com/nektos/act/releases).
-   
-2. **Extraction et installation**
-   
-   J'ai extrait le fichier ZIP et placé le fichier `act.exe` dans un dossier de mon choix sur mon ordinateur.
-
-3. **Ajout de `act` au PATH**
-
-   Pour rendre `act` accessible depuis le terminal, j'ai ajouté son dossier au `PATH` système :
-   
-   - Ouvrez les **Paramètres système avancés**.
-   - Cliquez sur **Variables d'environnement**.
-   - Dans la section **Variables système**, sélectionnez la variable `Path` et cliquez sur **Modifier**.
-   - Ajoutez le chemin du dossier contenant `act.exe` (par exemple, `C:\Users\VotreNomUtilisateur\act`).
-   - Cliquez sur **OK** pour valider.
-
-   Voici à quoi cela ressemble dans les paramètres système :
-
-   ![alt text](images/image-8.png)
-
-4. **Vérification de l'installation**
-
-   J'ai vérifié l'installation de `act` en tapant la commande suivante dans le terminal :
-
-   ```bash
-   act -v
-   ```
-
-   Lors de la première exécution, `act` m'a demandé de choisir une image Docker à utiliser pour exécuter les workflows. J'ai eu le choix entre plusieurs options d'images de différentes tailles :
-
-   - **Image de grande taille** : Environ 17 Go, nécessite 75 Go d'espace disque libre.
-   - **Image de taille moyenne** : Environ 500 Mo, compatible avec la plupart des actions.
-   - **Image de taille micro** : Moins de 200 Mo, contient uniquement NodeJS pour démarrer les actions.
-
-   J'ai choisi l'image de **taille micro** pour sa légèreté.
-
-   ![alt text](images/image-9.png)
-
-5. **Vérification des workflows avec `act`**
-
-   Après avoir configuré `act`, j'ai exécuté la commande `act -l` pour lister les workflows disponibles.
-
-   Voici le résultat obtenu :
-
-   ![alt text](images/image-10.png)
-
----
-
-## 3. **Problèmes rencontrés et solutions**
-
-### Problème 1 : **Erreurs liées à la version de Python**
-
-Lors de l'exécution de `act`, j'ai rencontré des erreurs qui étaient liées à la version de Python installée sur mon système. Cela est souvent dû à une incompatibilité entre les versions de Python et l'environnement d'exécution des actions.
-
-#### Solution :
-
-J'ai vérifié ma version de Python en utilisant la commande :
-
-```bash
-python --version
-```
-
-Ensuite, j'ai mis à jour Python à la version appropriée.
 
 ### Problème 2 : **Problème avec `git checkout`**
 
