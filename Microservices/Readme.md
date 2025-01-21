@@ -14,6 +14,19 @@ Le projet est une application de blog basée sur une architecture de microservic
   - Portainer
   - Weave Scope
 
+## Schéma d'Architecture
+![Schéma d'architecture](images/MicroServices.drawio.png)
+
+## Fonctionnalités principales
+1. **Backend** :
+   - GET `/api/articles` : Récupérer la liste des articles.
+   - POST `/api/articles` : Ajouter un nouvel article.
+   - Exposé sur le port **8080**.
+   
+2. **Frontend** :
+   - Application React permettant d'afficher et de créer des articles.
+   - Exposé sur le port **3001**.
+
 ## Configuration Docker Compose
 
 ### Étapes de Développement
@@ -127,10 +140,3 @@ docker push votrenomdutilisateur/frontend:latest
 ![alt text](images/image-6.png)
 
 Remplacez "votrenomdutilisateur" par votre nom d'utilisateur Docker Hub.
-
-### Architecture :
-
-![alt text](images/MicroServices.drawio.png)
-
-
-###
