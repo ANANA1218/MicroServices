@@ -3,6 +3,7 @@ version: '3'
 services:
   mysql:
     image: mysql:8.0
+    container_name: mysql-container
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: blog_db
@@ -10,9 +11,16 @@ services:
       MYSQL_PASSWORD: root
     ports:
       - "3306:3306"
-    volumes:
-      - mysql-data:/var/lib/mysql
-  
+    labels:
+      - "com.docker.compose.project=blog"
+      - "com.docker.compose.service=mysql"
+      - "io.weave.scope.mysql.server=true"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      
   backend:
     build:
       context: ./backend
@@ -22,33 +30,57 @@ services:
     depends_on:
       - mysql
     environment:
-      DB_HOST: mysql
+      DB_HOST: mysql-container
       DB_USER: user
       DB_PASSWORD: root
       DB_NAME: blog_db
+    labels:
+      - "com.docker.compose.project=blog"
+      - "com.docker.compose.service=backend"
+      - "io.weave.scope.mysql.client=true"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
       
+  adminer:
+    image: adminer
+    container_name: adminer-container
+    ports:
+      - "8080:8080"
+    labels:
+      - "com.docker.compose.project=blog"
+      - "com.docker.compose.service=adminer"
+
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
       - "3001:80"
+    labels:
+      - "com.docker.compose.project=blog"
+      - "com.docker.compose.service=frontend"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
-  nginx:
-    image: nginx:latest
+  cadvisor:
+    image: google/cadvisor:latest
+    container_name: cadvisor
     ports:
-      - "80:80"
-      - "443:443"
+      - "8081:8080"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    labels:
+      - "com.docker.compose.project=blog"
+      - "com.docker.compose.service=cadvisor"
 
   prometheus:
     image: prom/prometheus
@@ -56,23 +88,52 @@ services:
       - "9090:9090"
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
-
+    labels:
+      - "com.docker.compose.project=blog"
+      - "com.docker.compose.service=prometheus"
+    
   grafana:
     image: grafana/grafana
     ports:
-      - "3000:3000"
+      - "3004:3000"
     depends_on:
       - prometheus
+    labels:
+      - "com.docker.compose.project=blog"
+      - "com.docker.compose.service=grafana"
 
-  rabbitmq:
-    image: rabbitmq:3-management
+  portainer:
+    image: portainer/portainer-ce
+    container_name: portainer
+    restart: always
     ports:
-      - "5672:5672"
-      - "15672:15672"
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    labels:
+      - "com.docker.compose.project=blog"
+      - "com.docker.compose.service=portainer"
+
+  scope:
+    image: weaveworks/scope:1.13.2
+    container_name: weave-scope
+    command: ["--probe.docker=true", "--weave=false"]
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:rw"
+    ports:
+      - "4040:4040"
+    privileged: true
+    pid: host
+    labels:
+      - "com.docker.compose.project=blog"
+      - "com.docker.compose.service=scope"
 
 volumes:
   mysql-data:
+  portainer_data:
 
 networks:
   default:
     name: blog-app-network
+

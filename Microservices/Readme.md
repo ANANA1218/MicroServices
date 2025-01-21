@@ -140,3 +140,23 @@ docker push votrenomdutilisateur/frontend:latest
 ![alt text](images/image-6.png)
 
 Remplacez "votrenomdutilisateur" par votre nom d'utilisateur Docker Hub.
+
+
+graphana :
+
+![alt text](image.png)
+
+
+weave scope
+![alt text](image-1.png)
+
+prometheus
+
+![alt text](image-2.png)
+
+portainer 
+
+![alt text](image-3.png)
+
+cAdvisor
+![alt text](image-4.png)
