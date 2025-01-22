@@ -259,6 +259,46 @@ Mettez à jour Python à la version requise
 
 ---
 
+# Déploiement de l'Application Microservices avec Coolify sur WSL
+
+## Installation de Coolify
+
+### Téléchargement et Configuration Initiale
+Téléchargement de Coolify
+
+Nous avons téléchargé Coolify via le script d'installation officiel et configuré l'environnement WSL.
+
+![alt text](image-4.png)
+
+### Création du Compte Utilisateur
+Création de Compte
+
+Un compte administrateur a été créé pour accéder à l'interface de gestion Coolify.
+
+![alt text](image-5.png)
+
+
+## Interface Principale de Coolify
+Page Principale
+
+L'interface de Coolify offre une vue d'ensemble des services et des déploiements.
+
+![alt text](image-6.png)
+
+## Création de l'Application
+
+### Configuration avec Images Docker Hub
+Création Application Docker
+
+Nous avons configuré notre application microservices en utilisant les images Docker Hub préalablement publiées.
+
+![alt text](image-7.png)
+
+## Déploiement Final
+Déploiement de l'Application
+
+![alt text](image-8.png)
+
 # Problèmes de déploiement rencontrés
 
 ## Tentative avec Cloudron
@@ -302,6 +342,3 @@ Ces commandes ont généré les erreurs suivantes :
 ![alt text](image-2.png)
 
 
-## Conclusion
-
-En raison de ces difficultés techniques, je n'ai pas pu compléter la partie déploiement du projet comme initialement prévu. Nous continuons à explorer des solutions alternatives pour déployer notre application microservices.
