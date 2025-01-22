@@ -259,3 +259,49 @@ Mettez à jour Python à la version requise
 
 ---
 
+# Problèmes de déploiement rencontrés
+
+## Tentative avec Cloudron
+
+j'ai d'abord essayé d'utiliser Cloudron, mais j'ai rencontré l'erreur suivante :
+
+![alt text](image-1.png)
+
+Cette erreur indique que Cloudron ne supporte pas WSL et nécessite une virtualisation matérielle complète.
+
+## Tentative avec Coolify sur WSL
+
+Ensuite, j'ai tenté d'installer Coolify sur une VM WSL avec les commandes suivantes :
+
+```bash
+wget -q https://get.coolify.io -O install.sh
+sudo bash ./install.sh
+```
+
+Cependant, cette tentative a également échoué :
+
+
+![alt text](image-3.png)
+
+## Problèmes avec Docker sur Ubuntu 22
+
+Enfin, j'ai essayé d'installer Docker directement sur une machine virtuelle Ubuntu 22, mais j'ai rencontré des problèmes de dépendances :
+
+```bash
+sudo apt update
+sudo apt upgrade
+
+sudo apt install software-properties-common
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+```
+
+Ces commandes ont généré les erreurs suivantes :
+
+![alt text](image.png)
+
+![alt text](image-2.png)
+
+
+## Conclusion
+
+En raison de ces difficultés techniques, je n'ai pas pu compléter la partie déploiement du projet comme initialement prévu. Nous continuons à explorer des solutions alternatives pour déployer notre application microservices.
